@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron p-5 rounded">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold">AI-Powered Personal Finance Manager</h1>
+            <p class="lead">Take control of your finances with intelligent insights and automated categorization powered by machine learning.</p>
+            <hr class="my-4">
+            <p>Our AI system helps you understand your spending patterns, predict future expenses, and make smarter financial decisions.</p>
+            <div class="row mt-4">
+                <div class="col-md-6 mb-2">
+                    <a class="btn btn-light btn-lg w-100" href="{{ url_for('login') }}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <a class="btn btn-outline-light btn-lg w-100" href="{{ url_for('register') }}">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <i class="fas fa-robot display-1 text-light"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <i class="fas fa-robot fa-3x text-primary mb-3"></i>
+                <h4>AI-Powered Insights</h4>
+                <p class="text-muted">Machine learning algorithms automatically categorize expenses and detect spending patterns.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                <h4>Smart Predictions</h4>
+                <p class="text-muted">Get accurate forecasts of your future spending based on your financial behavior.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <i class="fas fa-shield-alt fa-3x text-warning mb-3"></i>
+                <h4>Anomaly Detection</h4>
+                <p class="text-muted">Identify unusual spending patterns and get alerts for potential financial issues.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>How It Works</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <h5 class="mt-3">1. Add Transactions</h5>
+                            <p>Enter your income and expenses</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h5 class="mt-3">2. AI Analysis</h5>
+                            <p>ML algorithms categorize and analyze</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h5 class="mt-3">3. View Insights</h5>
+                            <p>Get personalized financial insights</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h5 class="mt-3">4. Make Decisions</h5>
+                            <p>Use data to improve financial health</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

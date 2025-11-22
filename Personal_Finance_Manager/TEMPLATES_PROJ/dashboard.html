@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{{ url_for('add_transaction') }}" class="btn btn-sm btn-primary">
+            <i class="fas fa-plus"></i> Add Transaction
+        </a>
+    </div>
+</div>
+
+<!-- Financial Summary Cards -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Total Income</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹{{ "%.2f"|format(total_income) }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-bill-wave fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            Total Expenses</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹{{ "%.2f"|format(total_expenses) }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-danger"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Balance</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹{{ "%.2f"|format(balance) }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-wallet fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Financial Health</div>
+                        <div class="h5 mb-0 font-weight-bold {{ 'financial-health-excellent' if financial_health >= 80 else 'financial-health-good' if financial_health >= 60 else 'financial-health-fair' if financial_health >= 40 else 'financial-health-poor' }}">
+                            {{ financial_health }}/100
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-heartbeat fa-2x text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recent Transactions -->
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Transactions</h6>
+            </div>
+            <div class="card-body">
+                {% if recent_transactions %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in recent_transactions %}
+                            <tr>
+                                <td>{{ transaction.transaction_date }}</td>
+                                <td>{{ transaction.description }}</td>
+                                <td>
+                                    <span class="badge bg-secondary">{{ transaction.category }}</span>
+                                </td>
+                                <td class="{{ 'text-success' if transaction.type == 'income' else 'text-danger' }}">
+                                    <strong>₹{{ "%.2f"|format(transaction.amount) }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge {{ 'bg-success' if transaction.type == 'income' else 'bg-danger' }}">
+                                        {{ transaction.type|title }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No transactions yet</h5>
+                    <p class="text-muted">Start by adding your first transaction!</p>
+                    <a href="{{ url_for('add_transaction') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Transaction
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Insights & Quick Actions -->
+    <div class="col-lg-4">
+        <!-- AI Insights Card -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-robot"></i> AI Insights
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-magic"></i> Smart Categorization</h6>
+                    <small>Our AI automatically categorizes your transactions based on description patterns and amount analysis.</small>
+                </div>
+                <div class="alert alert-success">
+                    <h6><i class="fas fa-chart-line"></i> Pattern Recognition</h6>
+                    <small>Machine learning algorithms identify your spending habits and provide personalized insights.</small>
+                </div>
+                <div class="alert alert-warning">
+                    <h6><i class="fas fa-predict"></i> Predictive Analytics</h6>
+                    <small>Get AI-powered predictions for your future spending and financial trends.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Quick Stats</h6>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6 mb-3">
+                        <div class="text-primary">
+                            <i class="fas fa-arrow-up fa-2x"></i>
+                        </div>
+                        <div class="h5">{{ recent_transactions|selectattr('type', 'equalto', 'income')|list|length }}</div>
+                        <small>Income Transactions</small>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="text-danger">
+                            <i class="fas fa-arrow-down fa-2x"></i>
+                        </div>
+                        <div class="h5">{{ recent_transactions|selectattr('type', 'equalto', 'expense')|list|length }}</div>
+                        <small>Expense Transactions</small>
+                    </div>
+                </div>
+                
+                {% if financial_health >= 80 %}
+                <div class="alert alert-success">
+                    <i class="fas fa-trophy"></i> <strong>Excellent!</strong> Your financial health is great!
+                </div>
+                {% elif financial_health >= 60 %}
+                <div class="alert alert-info">
+                    <i class="fas fa-thumbs-up"></i> <strong>Good!</strong> You're managing your finances well.
+                </div>
+                {% elif financial_health >= 40 %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i> <strong>Fair.</strong> Consider reviewing your expenses.
+                </div>
+                {% else %}
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i> <strong>Needs attention.</strong> Focus on reducing expenses.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

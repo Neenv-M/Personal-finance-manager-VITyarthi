@@ -1,0 +1,38 @@
+
+### **6. statement.md**
+```markdown
+# Project Statement: AI-Powered Personal Finance Manager
+
+## Problem Statement
+Individuals struggle with manual expense tracking and lack intelligent insights into their spending patterns for better financial decision-making.
+
+## Target Users
+- Students managing monthly expenses
+- Young professionals tracking finances
+- Anyone seeking automated financial insights
+
+## High-level Features
+1. Automated transaction categorization using ML
+2. Spending pattern analysis and predictions
+3. Budget recommendation system
+4. Financial health assessment
+5. Anomaly detection in spending
+6. Interactive financial dashboard
+
+## Technical Features
+- AI-powered expense categorization (Random Forest)
+- Spending prediction (Linear Regression)
+- Anomaly detection (Isolation Forest)
+- Web-based responsive interface
+- Secure user authentication
+- Real-time analytics
+
+## Value Proposition
+Transforms traditional personal finance management by leveraging artificial intelligence to provide automated categorization, predictive insights, and intelligent recommendations for better financial decision-making.
+
+## Technology Stack
+- Python Flask backend
+- MySQL database
+- Scikit-learn for ML algorithms
+- Bootstrap frontend
+- Chart.js for visualizations

@@ -1,0 +1,11 @@
+PersonalFinanceManager/
+├── app.py                 # Main Flask application
+├── run.py                # Startup script
+├── config.py             # Configuration
+├── requirements.txt      # Dependencies
+├── models/               # Database models
+├── routes/               # Flask routes
+├── ml_models/            # AI/ML components
+├── templates/            # HTML templates
+├── static/               # CSS, JS
+└── database/             # Database schema
